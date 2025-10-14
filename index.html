@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GF Cleaning Services | Professional Power Washing</title>
+    <link rel="icon" type="image/x-icon" href="./images/gf_logo.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Mobile-first styles */
+        .hero-bg {
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+.service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Desktop enhancements */
+        @media (min-width: 1024px) {
+            .full-width-section {
+                margin-left: calc(-50vw + 50%);
+                margin-right: calc(-50vw + 50%);
+                width: 100vw;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Top Bar -->
+    <div class="bg-primary text-white py-2 px-4 flex justify-between items-center">
+        <a href="tel:512-357-8302" class="flex items-center gap-2">
+            <i data-feather="phone"></i>
+            <span class="hidden sm:inline">Call Us Now: 512-357-8302</span>
+            <span class="sm:hidden">Call Now</span>
+        </a>
+        <a href="#estimate" class="bg-secondary px-3 py-1 sm:px-4 rounded-full font-medium hover:bg-opacity-90 transition text-sm sm:text-base">
+            Free Estimate
+        </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#">
+                <img src="./images/gf_logo.svg" 
+                     alt="GF Cleaning Services" class="h-10 sm:h-12">
+            </a>
+            <div class="hidden lg:flex gap-8">
+                <a href="#services" class="text-gray-700 hover:text-primary font-medium">Services</a>
+                <a href="#residential" class="text-gray-700 hover:text-primary font-medium">Residential</a>
+                <a href="#commercial" class="text-gray-700 hover:text-primary font-medium">Commercial</a>
+                <a href="#housekeeping" class="text-gray-700 hover:text-primary font-medium">Housekeeping</a>
+                <a href="#about" class="text-gray-700 hover:text-primary font-medium">About Us</a>
+                <a href="#contact" class="text-gray-700 hover:text-primary font-medium">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="lg:hidden">
+                <i data-feather="menu"></i>
+            </button>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero-bg text-white min-h-[60vh] flex items-center">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="./images/gf-cleaning-hero.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="container mx-auto px-4 py-20 relative z-10">
+<h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Professional Cleaning Services</h1>
+            <p class="text-lg sm:text-xl mb-8 max-w-2xl">Bringing back the shine to your property with our expert power washing services.</p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#estimate" class="bg-secondary px-6 py-3 sm:px-8 rounded-full font-medium hover:bg-opacity-90 transition text-center">
+                    Get Free Estimate
+                </a>
+                <a href="#services" class="bg-white text-primary px-6 py-3 sm:px-8 rounded-full font-medium hover:bg-gray-100 transition text-center">
+                    Our Services
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">About GF Cleaning Services</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Professional cleaning with a personal touch</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-1/2">
+                    <img src="./images/about.jpg" alt="Our Team" class="rounded-lg shadow-md w-full">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-xl font-semibold mb-4">Our Story</h3>
+                    <p class="text-gray-700 mb-4">Founded in 2018, GF Cleaning Services began with a simple mission: to provide exceptional exterior cleaning services that enhance curb appeal and protect property investments.</p>
+                    <p class="text-gray-700 mb-4">What started as a small local business has grown into a trusted name in pressure washing and exterior cleaning throughout Texas.</p>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h4 class="font-medium mb-3 text-primary">Why Choose Us</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i data-feather="check-circle" class="text-secondary mr-2 mt-1"></i>
+                                <span>Insured professionals</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-feather="check-circle" class="text-secondary mr-2 mt-1"></i>
+                                <span>Eco-friendly cleaning solutions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-feather="check-circle" class="text-secondary mr-2 mt-1"></i>
+                                <span>100% satisfaction guarantee</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-feather="check-circle" class="text-secondary mr-2 mt-1"></i>
+                                <span>Locally owned and operated</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estimate Form -->
+    <section id="estimate" class="py-16 bg-gray-100 md:full-width-section">
+        <div class="container mx-auto px-4">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden max-w-4xl mx-auto md:max-w-none">
+                <div class="md:flex">
+                    <div class="md:w-1/2 p-6 md:p-8">
+                        <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Thank you for Your Interest!</h2>
+                        <p class="text-gray-600 mb-6">Fill out our free estimate form below, and we will contact you as soon as possible.</p>
+                        <div class="space-y-4">
+                            <img src="./images/before.png" 
+                                 alt="Cleaning Team" class="rounded-lg w-full">
+                            <img src="./images/after.png" 
+                                 alt="Residential Cleaning" class="rounded-lg w-full">
+                        </div>
+</div>
+                    <div class="md:w-1/2 p-6 md:p-8 bg-primary bg-opacity-5">
+                        <form class="space-y-4" action="https://formsubmit.co/gf-cleaningservices@gmail.com" method="POST">
+						<input type="hidden" name="_template" value="table">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-700 mb-1">First Name (required)</label>
+                                    <input name="First Name" placeholder="John" type="text" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-1">Last Name</label>
+                                    <input name=" Last Name" placeholder="Doe" type="text" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-1">Email (required)</label>
+                                <input name="Email" placeholder="yourname@example.com" type="email" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-1">Phone (required)</label>
+                                <input name="Phone" placeholder="+(555) 555-555" type="tel" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-1">Address Line 1 (required)</label>
+                                <input name="Address Line 1" placeholder="123 Main Street" type="text" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-1">Address Line 2</label>
+                                <input name="Address Line 2" placeholder="" type="text" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-gray-700 mb-1">City (required)</label>
+                                    <input name="City" placeholder="Anytown" type="text" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 mb-1">ZIP Code (required)</label>
+                                    <input name="ZIP Code" placeholder="12345" type="text" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-1">What services are you interested in?</label>
+                                <div class="space-y-2">
+                                    <label class="flex items-center">
+                                        <input name="House Washing" type="checkbox" class="rounded text-primary">
+                                        <span class="ml-2">House Washing</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input name="Roof Cleaning" type="checkbox" class="rounded text-primary">
+                                        <span class="ml-2">Roof Cleaning</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input name="Gutter Cleaning" type="checkbox" class="rounded text-primary">
+                                        <span class="ml-2">Gutter Cleaning</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input name="Concrete Cleaning" type="checkbox" class="rounded text-primary">
+                                        <span class="ml-2">Concrete Cleaning</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input name="Deck and Fence Cleaning" type="checkbox" class="rounded text-primary">
+                                        <span class="ml-2">Deck and Fence Cleaning</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input name="Commercial Pressure Washing" type="checkbox" class="rounded text-primary">
+                                        <span class="ml-2">Commercial Pressure Washing</span>
+                                    </label>
+                                                                                                       <label class="flex items-center">
+                                        <input name="Residental Housekeeping" type="checkbox" class="rounded text-primary">
+                                        <span class="ml-2">Residential Housekeeping</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input name="Commercial Cleaning Services" type="checkbox" class="rounded text-primary">
+                                        <span class="ml-2">Commercial Cleaning Services</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-1">How soon would you like service completed?</label>
+                                <select name="Timeline" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option>ASAP</option>
+                                    <option>Within 1 week</option>
+                                    <option>Within 2 weeks</option>
+                                    <option>Within 1 month</option>
+                                    <option>Not sure yet</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-1">How did you hear about us?</label>
+                                <input name="How they heard about you" placeholder="Word of Mouth, Contact Card, etc..." type="text" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-1">Anything you would like us to know?</label>
+                                <textarea name="Notes" placeholder="Your Message" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-opacity-90 transition">
+                                Submit Request
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-4">Our Cleaning Services</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">We offer a comprehensive range of professional cleaning services to meet all your property maintenance needs.</p>
+            </div>
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="service-card bg-white p-6 rounded-xl shadow-md transition duration-300">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4">
+                        <i data-feather="home" class="text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">House Washing</h3>
+                    <p class="text-gray-600">Restore your home's exterior to its original beauty with our gentle yet effective washing techniques.</p>
+                </div>
+                <div class="service-card bg-white p-6 rounded-xl shadow-md transition duration-300">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4">
+                        <i data-feather="layers" class="text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Roof Cleaning</h3>
+                    <p class="text-gray-600">Remove harmful algae, moss, and stains to protect your roof and enhance curb appeal.</p>
+                </div>
+                <div class="service-card bg-white p-6 rounded-xl shadow-md transition duration-300">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4">
+                        <i data-feather="droplet" class="text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Gutter Cleaning</h3>
+                    <p class="text-gray-600">Keep your gutters flowing freely and protect your home from water damage.</p>
+                </div>
+                <div class="service-card bg-white p-6 rounded-xl shadow-md transition duration-300">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4">
+                        <i data-feather="grid" class="text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Concrete Cleaning</h3>
+                    <p class="text-gray-600">Revitalize your driveways, sidewalks, and patios removing years of built-up grime.</p>
+                </div>
+                <div class="service-card bg-white p-6 rounded-xl shadow-md transition duration-300">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4">
+                        <i data-feather="trello" class="text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Deck & Fence</h3>
+                    <p class="text-gray-600">Bring back the natural beauty of your outdoor wood surfaces with our specialized cleaning.</p>
+                </div>
+                <div class="service-card bg-white p-6 rounded-xl shadow-md transition duration-300">
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-full w-14 h-14 flex items-center justify-center mb-4">
+                        <i data-feather="briefcase" class="text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Commercial</h3>
+                    <p class="text-gray-600">Professional cleaning solutions for businesses to maintain a pristine professional appearance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Housekeeping Section -->
+    <section id="housekeeping" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row-reverse items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pl-8">
+                    <span class="bg-secondary text-white text-xs font-medium px-2.5 py-0.5 rounded-full mb-2 inline-block">!!NEW!!</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Professional Housekeeping</h2>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Deep Cleaning</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Regular Maintenance</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Move In/Out Cleaning</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Apartment Cleaning</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Commercial Spaces</span>
+                        </li>
+                    </ul>
+                    <a href="#estimate" class="mt-6 inline-block bg-primary text-white px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition">
+                        Get Housekeeping Estimate
+                    </a>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="./images/gf-hc.jpg" 
+                         alt="Professional Cleaning" class="rounded-lg object-cover h-64 sm:h-96 w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Residential Section -->
+    <section id="residential" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Residential Power Washing</h2>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Home Exterior</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Driveways</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Sidewalks</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Decks/Fencing</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Gutter Cleaning</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Retaining Walls</span>
+                        </li>
+                    </ul>
+                    <a href="#estimate" class="mt-6 inline-block bg-primary text-white px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition">
+                        Get Residential Estimate
+                    </a>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="./images/gf-rc.jpg" 
+                         alt="Residential Cleaning" class="rounded-lg object-cover h-64 sm:h-96 w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commercial Section -->
+    <section id="commercial" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row-reverse items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pl-8">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Commercial Power Washing</h2>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Business Exterior</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Walkways</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Gas Stations</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Restaurants</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Strip Malls</span>
+                        </li>
+                    </ul>
+                    <a href="#estimate" class="mt-6 inline-block bg-primary text-white px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition">
+                        Get Commercial Estimate
+                    </a>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="./images/gf-bc.jpg" 
+                         alt="Commercial Cleaning" class="rounded-lg object-cover h-64 sm:h-96 w-full object-top">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-100 md:full-width-section">
+        <div class="container mx-auto px-4">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden max-w-4xl mx-auto md:max-w-none">
+                <div class="md:flex">
+                    <div class="md:w-1/2 p-6 md:p-8 bg-primary text-white">
+                        <h2 class="text-2xl sm:text-3xl font-bold mb-4">Contact Us</h2>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <i data-feather="map-pin" class="mr-3 mt-1"></i>
+                                <div>
+                                    <h3 class="font-medium">Address</h3>
+                                    <p>3413 Hunter Rd Unit D PMB 246<br>San Marcos, TX 78666</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i data-feather="phone" class="mr-3 mt-1"></i>
+                                <div>
+                                    <h3 class="font-medium">Phone</h3>
+                                    <p>512-357-8302</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i data-feather="mail" class="mr-3 mt-1"></i>
+                                <div>
+                                    <h3 class="font-medium">Email</h3>
+                                    <a href="mailto:gfcleaningservices18@gmail.com" class="underline hover:no-underline">gfcleaningservices18@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 p-6 md:p-8">
+                        <h3 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4">Get In Touch</h3>
+                        <form class="space-y-4" action="https://formsubmit.co/gf-cleaningservices@gmail.com" method="POST">
+						<input type="hidden" name="_template" value="table">
+                            <div>
+                                <label class="block text-gray-700 mb-1">Name</label>
+                                <input placeholder="John Doe" type="text" name="Name" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-1">Email</label>
+                                <input placeholder="yourname@example.com" type="email" name="Email" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-1">Phone</label>
+                                <input placeholder="+(555) 555-555" type="tel" name="Phone" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-1">Message</label>
+                                <textarea placeholder="Type your message" name="Message" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-opacity-90 transition">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <img src="./images/gf-logo-white.svg" style="color: white;" height="50px" width="50px"
+                         alt="GF Cleaning Services" class="h-10">
+                </div>
+                <div class="flex flex-col items-center md:items-end">
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="hover:text-primary transition">
+                            <i data-feather="facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/gfcleaningservices18?igsh=NnZ4dHlydGsxMmdu" class="hover:text-primary transition">
+                            <i data-feather="instagram"></i>
+                        </a>
+                        <a href="#" class="hover:text-primary transition">
+                            <i data-feather="twitter"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm">© 2025 GF Cleaning Services. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+        
+        // Mobile menu functionality
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.createElement('div');
+        mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 p-4 overflow-y-auto';
+        mobileMenu.innerHTML = `
+            <div class="flex justify-between items-center mb-8">
+                <img src="./images/gf_logo.svg" 
+                     alt="GF Cleaning Services" class="h-10">
+                <button id="mobile-menu-close" class="text-gray-700">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+        <nav class="flex flex-col space-y-6">
+<a href="#services" class="text-gray-700 hover:text-primary font-medium py-2">Services</a>
+                <a href="#residential" class="text-gray-700 hover:text-primary font-medium py-2">Residential</a>
+                <a href="#commercial" class="text-gray-700 hover:text-primary font-medium py-2">Commercial</a>
+                <a href="#housekeeping" class="text-gray-700 hover:text-primary font-medium py-2">Housekeeping</a>
+                <a href="#about" class="text-gray-700 hover:text-primary font-medium py-2">About Us</a>
+                <a href="#contact" class="text-gray-700 hover:text-primary font-medium py-2">Contact</a>
+                <a href="#estimate" class="bg-secondary text-white px-6 py-3 rounded-full font-medium hover:bg-opacity-90 transition text-center mt-4">
+                    Free Estimate
+                </a>
+            </nav>
+        `;
+        document.body.appendChild(mobileMenu);
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            feather.replace();
+        });
+
+        document.getElementById('mobile-menu-close').addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+
+        // Close menu when clicking on a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
