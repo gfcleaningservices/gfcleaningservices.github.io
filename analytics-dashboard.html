@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard - GF Cleaning Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Color Tokens */
+            --bg-base: #000000;
+            --bg-primary: #0a0a0a;
+            --surface-elevated: #141414;
+            --surface-hover: #1e1e1e;
+            --surface-modal: #282828;
+            
+            --text-primary: #e4e4e7;
+            --text-secondary: #a1a1aa;
+            --text-tertiary: #71717a;
+            --text-inverse: #18181b;
+            
+            --accent-primary: #3b82f6;
+            --accent-primary-hover: #60a5fa;
+            --accent-secondary: #06b6d4;
+            --accent-purple: #a855f7;
+            
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --info: #06b6d4;
+            
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --border-moderate: rgba(255, 255, 255, 0.15);
+            --border-strong: rgba(255, 255, 255, 0.2);
+            
+            /* Typography */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            
+            /* Spacing */
+            --space-1: 4px;
+            --space-2: 8px;
+            --space-3: 12px;
+            --space-4: 16px;
+            --space-6: 24px;
+            --space-8: 32px;
+            --space-12: 48px;
+            
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            
+            /* Shadows */
+            --shadow-card: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 4px 12px rgba(0, 0, 0, 0.5);
+            --shadow-card-hover: 0 0 0 1px rgba(255, 255, 255, 0.15), 0 8px 24px rgba(0, 0, 0, 0.6);
+            --glow-accent: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3);
+            --glow-subtle: 0 0 12px rgba(59, 130, 246, 0.3);
+            
+            /* Animation */
+            --duration-fast: 150ms;
+            --duration-normal: 250ms;
+            --duration-slow: 400ms;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-subtle);
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-8);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .navbar-logo {
+            width: 40px;
+            height: 40px;
+            display: block;
+        }
+
+        .navbar-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-primary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--duration-fast) ease-out;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            filter: brightness(110%);
+            box-shadow: var(--glow-subtle);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            padding: var(--space-2);
+            background: transparent;
+            border-radius: var(--radius-md);
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--duration-fast) ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-icon:hover {
+            background: var(--surface-hover);
+            color: var(--text-primary);
+        }
+
+        .btn-icon.loading {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        select {
+            padding: 10px 16px;
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: var(--font-primary);
+            font-size: 14px;
+            cursor: pointer;
+            transition: all var(--duration-fast) ease-out;
+        }
+
+        select:hover {
+            border-color: var(--border-moderate);
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: var(--space-8);
+            padding-top: calc(64px + var(--space-8));
+        }
+
+        /* Section Spacing */
+        .section {
+            margin-bottom: var(--space-12);
+        }
+
+        /* Metric Cards Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-6);
+        }
+
+        .metric-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            box-shadow: var(--shadow-card);
+            transition: all var(--duration-normal) ease-out;
+        }
+
+        .metric-card:hover {
+            background: var(--surface-hover);
+            border-color: var(--border-moderate);
+            box-shadow: var(--shadow-card-hover);
+            transform: translateY(-2px);
+        }
+
+        .metric-value {
+            font-family: var(--font-mono);
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-3);
+        }
+
+        .metric-change {
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .metric-change.positive {
+            color: var(--success);
+        }
+
+        .metric-change.negative {
+            color: var(--error);
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            box-shadow: var(--shadow-card);
+        }
+
+        .chart-header {
+            margin-bottom: var(--space-6);
+        }
+
+        .chart-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-1);
+        }
+
+        .chart-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .chart-canvas {
+            height: 400px;
+            position: relative;
+        }
+
+        .chart-canvas canvas {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        /* Data Table */
+        .table-container {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            box-shadow: var(--shadow-card);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        td {
+            padding: 12px 16px;
+            font-size: 14px;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        tbody tr {
+            transition: background var(--duration-fast) ease-out;
+        }
+
+        tbody tr:hover {
+            background: var(--surface-hover);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-number {
+            font-family: var(--font-mono);
+        }
+
+        /* 2-Column Grid */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-8);
+        }
+
+        /* Loading State */
+        .loading-skeleton {
+            background: linear-gradient(90deg, #27272a 25%, #3f3f46 50%, #27272a 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite ease-in-out;
+            border-radius: var(--radius-md);
+            height: 24px;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .loading-message {
+            text-align: center;
+            padding: var(--space-12);
+            color: var(--text-secondary);
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--error);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            color: var(--error);
+            text-align: center;
+        }
+
+        /* Activity Feed */
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: var(--space-4);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-time {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            min-width: 100px;
+        }
+
+        .activity-content {
+            flex: 1;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .activity-device {
+            font-size: 12px;
+            color: var(--text-secondary);
+            padding: 2px 8px;
+            background: var(--surface-hover);
+            border-radius: var(--radius-sm);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--space-4);
+                padding-top: calc(64px + var(--space-4));
+            }
+
+            .navbar {
+                padding: 0 var(--space-4);
+            }
+
+            .navbar-brand {
+                font-size: 16px;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-4);
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .chart-canvas {
+                height: 300px;
+            }
+
+            .metric-value {
+                font-size: 28px;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="./images/gf_logo.svg" alt="GF Logo" class="navbar-logo">
+            <span>GF Cleaning Services Analytics</span>
+        </div>
+        <div class="navbar-actions">
+            <select id="dateRangeFilter">
+                <option value="today">Today</option>
+                <option value="7d" selected>Last 7 Days</option>
+                <option value="30d">Last 30 Days</option>
+            </select>
+            <button class="btn-icon" id="refreshBtn" title="Refresh">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Key Metrics -->
+        <div class="section">
+            <div class="metrics-grid" id="metricsGrid">
+                <!-- Metrics will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Traffic Trends Chart -->
+        <div class="section">
+            <div class="chart-container">
+                <div class="chart-header">
+                    <div class="chart-title">Traffic Trends</div>
+                    <div class="chart-subtitle">Page views and unique visitors over time</div>
+                </div>
+                <div class="chart-canvas">
+                    <canvas id="trafficChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Pages Table -->
+        <div class="section">
+            <div class="table-container">
+                <div class="chart-header">
+                    <div class="chart-title">Top Pages</div>
+                    <div class="chart-subtitle">Most visited pages on your website</div>
+                </div>
+                <table id="topPagesTable">
+                    <thead>
+                        <tr>
+                            <th>Page Title</th>
+                            <th>Page Views</th>
+                            <th>Unique Visitors</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Traffic Sources & Devices -->
+        <div class="section">
+            <div class="grid-2">
+                <!-- Traffic Sources -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Traffic Sources</div>
+                        <div class="chart-subtitle">Where your visitors come from</div>
+                    </div>
+                    <div class="chart-canvas" style="height: 300px;">
+                        <canvas id="sourcesChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Device Breakdown -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Device Breakdown</div>
+                        <div class="chart-subtitle">Desktop, mobile, and tablet</div>
+                    </div>
+                    <div class="chart-canvas" style="height: 300px;">
+                        <canvas id="devicesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Browser Stats & Recent Activity -->
+        <div class="section">
+            <div class="grid-2">
+                <!-- Browser Stats -->
+                <div class="table-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Browser Stats</div>
+                        <div class="chart-subtitle">Most popular browsers</div>
+                    </div>
+                    <table id="browserTable">
+                        <thead>
+                            <tr>
+                                <th>Browser</th>
+                                <th>Views</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="table-container">
+                    <div class="chart-header">
+                        <div class="chart-title">Recent Activity</div>
+                        <div class="chart-subtitle">Latest page views</div>
+                    </div>
+                    <div id="recentActivity">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const SUPABASE_URL = 'https://adkoaefjfmpuctnvjdmx.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFka29hZWZqZm1wdWN0bnZqZG14Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE4NTA0ODAsImV4cCI6MjA3NzQyNjQ4MH0.pIdqctia-JSj-3fh5qgnL6y6jjWLsLpwm3okj3N1i7U';
+        const ANALYTICS_ENDPOINT = SUPABASE_URL + '/functions/v1/analytics-query';
+
+        let trafficChart = null;
+        let sourcesChart = null;
+        let devicesChart = null;
+
+        // Chart.js default configuration for dark mode
+        Chart.defaults.color = '#a1a1aa';
+        Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+        Chart.defaults.font.family = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+
+        /**
+         * Fetch analytics data from Supabase edge function
+         */
+        async function fetchAnalytics(dateRange) {
+            try {
+                const response = await fetch(`${ANALYTICS_ENDPOINT}?range=${dateRange}`, {
+                    headers: {
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch analytics data');
+                }
+
+                const result = await response.json();
+                return result.data;
+            } catch (error) {
+                console.error('Analytics fetch error:', error);
+                throw error;
+            }
+        }
+
+        /**
+         * Render key metrics cards
+         */
+        function renderMetrics(metrics) {
+            const metricsGrid = document.getElementById('metricsGrid');
+            metricsGrid.innerHTML = `
+                <div class="metric-card">
+                    <div class="metric-value">${metrics.totalPageViews.toLocaleString()}</div>
+                    <div class="metric-label">Total Page Views</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">${metrics.uniqueVisitors.toLocaleString()}</div>
+                    <div class="metric-label">Unique Visitors</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">${metrics.avgSessionDuration}s</div>
+                    <div class="metric-label">Avg Session Duration</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">${metrics.bounceRate}%</div>
+                    <div class="metric-label">Bounce Rate</div>
+                </div>
+            `;
+        }
+
+        /**
+         * Render traffic over time chart
+         */
+        function renderTrafficChart(data) {
+            const ctx = document.getElementById('trafficChart').getContext('2d');
+            
+            if (trafficChart) {
+                trafficChart.destroy();
+            }
+
+            trafficChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.map(d => d.date),
+                    datasets: [
+                        {
+                            label: 'Page Views',
+                            data: data.map(d => d.views),
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Unique Visitors',
+                            data: data.map(d => d.unique_visitors),
+                            borderColor: '#06b6d4',
+                            backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                color: '#a1a1aa',
+                                padding: 16,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#282828',
+                            titleColor: '#e4e4e7',
+                            bodyColor: '#a1a1aa',
+                            borderColor: 'rgba(255, 255, 255, 0.15)',
+                            borderWidth: 1,
+                            padding: 12,
+                            displayColors: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#71717a'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#71717a'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        /**
+         * Render traffic sources donut chart
+         */
+        function renderSourcesChart(data) {
+            const ctx = document.getElementById('sourcesChart').getContext('2d');
+            
+            if (sourcesChart) {
+                sourcesChart.destroy();
+            }
+
+            const colors = {
+                'Direct': '#3b82f6',
+                'Google': '#22c55e',
+                'Bing': '#f59e0b',
+                'Facebook': '#a855f7',
+                'Twitter': '#06b6d4',
+                'LinkedIn': '#3b82f6',
+                'Referral': '#71717a'
+            };
+
+            sourcesChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: data.map(d => d.source),
+                    datasets: [{
+                        data: data.map(d => d.count),
+                        backgroundColor: data.map(d => colors[d.source] || '#71717a'),
+                        borderWidth: 2,
+                        borderColor: '#0a0a0a'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'right',
+                            labels: {
+                                color: '#a1a1aa',
+                                padding: 12,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#282828',
+                            titleColor: '#e4e4e7',
+                            bodyColor: '#a1a1aa',
+                            borderColor: 'rgba(255, 255, 255, 0.15)',
+                            borderWidth: 1,
+                            padding: 12
+                        }
+                    }
+                }
+            });
+        }
+
+        /**
+         * Render device breakdown chart
+         */
+        function renderDevicesChart(data) {
+            const ctx = document.getElementById('devicesChart').getContext('2d');
+            
+            if (devicesChart) {
+                devicesChart.destroy();
+            }
+
+            const colors = {
+                'desktop': '#3b82f6',
+                'mobile': '#06b6d4',
+                'tablet': '#a855f7'
+            };
+
+            devicesChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: data.map(d => d.device.charAt(0).toUpperCase() + d.device.slice(1)),
+                    datasets: [{
+                        data: data.map(d => d.count),
+                        backgroundColor: data.map(d => colors[d.device] || '#71717a'),
+                        borderWidth: 2,
+                        borderColor: '#0a0a0a'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'right',
+                            labels: {
+                                color: '#a1a1aa',
+                                padding: 12,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#282828',
+                            titleColor: '#e4e4e7',
+                            bodyColor: '#a1a1aa',
+                            borderColor: 'rgba(255, 255, 255, 0.15)',
+                            borderWidth: 1,
+                            padding: 12
+                        }
+                    }
+                }
+            });
+        }
+
+        /**
+         * Render top pages table
+         */
+        function renderTopPages(pages) {
+            const tbody = document.querySelector('#topPagesTable tbody');
+            tbody.innerHTML = pages.map(page => `
+                <tr>
+                    <td>${page.title}</td>
+                    <td class="table-number">${page.views}</td>
+                    <td class="table-number">${page.unique_visitors}</td>
+                </tr>
+            `).join('');
+        }
+
+        /**
+         * Render browser stats table
+         */
+        function renderBrowserStats(browsers) {
+            const tbody = document.querySelector('#browserTable tbody');
+            tbody.innerHTML = browsers.slice(0, 5).map(browser => `
+                <tr>
+                    <td>${browser.browser}</td>
+                    <td class="table-number">${browser.count}</td>
+                </tr>
+            `).join('');
+        }
+
+        /**
+         * Render recent activity feed
+         */
+        function renderRecentActivity(activities) {
+            const container = document.getElementById('recentActivity');
+            
+            if (activities.length === 0) {
+                container.innerHTML = '<div class="loading-message">No recent activity</div>';
+                return;
+            }
+
+            container.innerHTML = activities.map(activity => {
+                const time = new Date(activity.timestamp);
+                const relativeTime = getRelativeTime(time);
+                
+                return `
+                    <div class="activity-item">
+                        <div class="activity-time">${relativeTime}</div>
+                        <div class="activity-content">${activity.page_title}</div>
+                        <div class="activity-device">${activity.device_type}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        /**
+         * Get relative time string (e.g., "2 minutes ago")
+         */
+        function getRelativeTime(date) {
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            const diffHours = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+
+            if (diffMins < 1) return 'Just now';
+            if (diffMins < 60) return `${diffMins} min ago`;
+            if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+            return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+        }
+
+        /**
+         * Load and render all analytics data
+         */
+        async function loadDashboard() {
+            const dateRange = document.getElementById('dateRangeFilter').value;
+            const refreshBtn = document.getElementById('refreshBtn');
+            
+            try {
+                refreshBtn.classList.add('loading');
+                
+                const data = await fetchAnalytics(dateRange);
+                
+                renderMetrics(data.metrics);
+                renderTrafficChart(data.trafficOverTime);
+                renderSourcesChart(data.trafficSources);
+                renderDevicesChart(data.deviceBreakdown);
+                renderTopPages(data.topPages);
+                renderBrowserStats(data.browserBreakdown);
+                renderRecentActivity(data.recentActivity);
+                
+            } catch (error) {
+                console.error('Failed to load dashboard:', error);
+                alert('Failed to load analytics data. Please try again.');
+            } finally {
+                refreshBtn.classList.remove('loading');
+            }
+        }
+
+        // Event listeners
+        document.getElementById('dateRangeFilter').addEventListener('change', loadDashboard);
+        document.getElementById('refreshBtn').addEventListener('click', loadDashboard);
+
+        // Initial load
+        loadDashboard();
+
+        // Auto-refresh every 60 seconds
+        setInterval(loadDashboard, 60000);
+    </script>
+</body>
+</html>
