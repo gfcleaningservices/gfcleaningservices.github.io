@@ -11,6 +11,7 @@
 
     // Configuration
     const ANALYTICS_ENDPOINT = 'https://adkoaefjfmpuctnvjdmx.supabase.co/functions/v1/analytics-track';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFka29hZWZqZm1wdWN0bnZqZG14Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE4NTA0ODAsImV4cCI6MjA3NzQyNjQ4MH0.pIdqctia-JSj-3fh5qgnL6y6jjWLsLpwm3okj3N1i7U';
     const STORAGE_KEY_VISITOR = 'gf_analytics_visitor_id';
     const STORAGE_KEY_SESSION = 'gf_analytics_session_id';
     const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes in milliseconds
@@ -148,7 +149,8 @@
         fetch(ANALYTICS_ENDPOINT, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
             },
             body: JSON.stringify(eventData),
             keepalive: true // Ensure request completes even if page is closing
