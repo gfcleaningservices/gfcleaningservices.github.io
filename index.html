@@ -3,18 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GF Cleaning Services offers professional power washing, housekeeping, and commercial cleaning in San Marcos, TX. Expert services include house washing, roof cleaning, and commercial power washing. Free estimates available!">
     <title>GF Cleaning Services | Professional Power Washing</title>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preload" as="video" href="./images/gf-cleaning-hero.mp4" fetchpriority="high">
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/gfcleaningservices/gfcleaningservices.github.io/refs/heads/main/images/gf_logo.ico">
+    
+    <!-- Load Tailwind with high priority but async -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <!-- Defer Feather Icons -->
+    <script defer src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#3b82f6',
-                        secondary: '#10b981',
+                        primary: '#0052cc',
+                        secondary: '#087f5b',
+                        'primary-dark': '#003d99',
+                        'secondary-dark': '#066b4b',
                     }
                 }
             }
@@ -44,7 +53,7 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: -1;
         }
-.service-card:hover {
+        .service-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
@@ -57,44 +66,54 @@
                 width: 100vw;
             }
         }
+
+        /* Prevent FOUC (Flash of Unstyled Content) */
+        .no-fouc {
+            visibility: hidden;
+        }
+        .fouc-ready {
+            visibility: visible;
+        }
     </style>
 </head>
-<body class="font-sans bg-gray-50">
+<body class="font-sans bg-gray-50 no-fouc">
     <!-- Top Bar -->
     <div class="bg-primary text-white py-2 px-4 flex justify-between items-center">
-        <a href="tel:512-357-8302" class="flex items-center gap-2">
+        <a href="tel:512-357-8302" class="flex items-center gap-2 font-medium hover:text-gray-200 transition">
             <i data-feather="phone"></i>
             <span class="hidden sm:inline">Call Us Now: 512-357-8302</span>
             <span class="sm:hidden">Call Now</span>
         </a>
-        <a href="#estimate" class="bg-secondary px-3 py-1 sm:px-4 rounded-full font-medium hover:bg-opacity-90 transition text-sm sm:text-base">
+        <a href="#estimate" class="bg-secondary text-white px-3 py-1 sm:px-4 rounded-full font-semibold hover:bg-secondary-dark transition text-sm sm:text-base">
             Free Estimate
         </a>
     </div>
 
     <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
+    <nav class="bg-white shadow-md sticky top-0 z-50" role="navigation" aria-label="Main navigation">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#">
+            <a href="#" aria-label="Home">
                 <img src="./images/gf_logo.svg" 
-                     alt="GF Cleaning Services" class="h-10 sm:h-12">
+                     alt="GF Cleaning Services Logo" class="h-10 sm:h-12"
+                     width="48" height="48">
             </a>
-            <div class="hidden lg:flex gap-8">
-                <a href="#services" class="text-gray-700 hover:text-primary font-medium">Services</a>
-                <a href="#residential" class="text-gray-700 hover:text-primary font-medium">Residential</a>
-                <a href="#commercial" class="text-gray-700 hover:text-primary font-medium">Commercial</a>
-                <a href="#housekeeping" class="text-gray-700 hover:text-primary font-medium">Housekeeping</a>
-                <a href="#about" class="text-gray-700 hover:text-primary font-medium">About Us</a>
-                <a href="#contact" class="text-gray-700 hover:text-primary font-medium">Contact</a>
+            <div class="hidden lg:flex gap-8" role="menubar">
+                <a href="#services" class="text-gray-700 hover:text-primary font-medium" role="menuitem">Services</a>
+                <a href="#residential" class="text-gray-700 hover:text-primary font-medium" role="menuitem">Residential</a>
+                <a href="#commercial" class="text-gray-700 hover:text-primary font-medium" role="menuitem">Commercial</a>
+                <a href="#housekeeping" class="text-gray-700 hover:text-primary font-medium" role="menuitem">Housekeeping</a>
+                <a href="#about" class="text-gray-700 hover:text-primary font-medium" role="menuitem">About Us</a>
+                <a href="#contact" class="text-gray-700 hover:text-primary font-medium" role="menuitem">Contact</a>
             </div>
-            <button id="mobile-menu-button" class="lg:hidden">
-                <i data-feather="menu"></i>
+            <button id="mobile-menu-button" class="lg:hidden" aria-label="Toggle mobile menu" aria-expanded="false">
+                <i data-feather="menu" aria-hidden="true"></i>
             </button>
         </div>
     </nav>
+    <main id="main-content" role="main">
     <!-- Hero Section -->
     <section class="hero-bg text-white min-h-[60vh] flex items-center">
-        <video class="hero-video" autoplay muted loop playsinline>
+        <video class="hero-video" autoplay muted loop playsinline fetchpriority="high" loading="eager">
             <source src="./images/gf-cleaning-hero.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
@@ -102,10 +121,10 @@
 <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">Professional Cleaning Services</h1>
             <p class="text-lg sm:text-xl mb-8 max-w-2xl">Bringing back the shine to your property with our expert power washing services.</p>
             <div class="flex flex-col sm:flex-row gap-4">
-                <a href="#estimate" class="bg-secondary px-6 py-3 sm:px-8 rounded-full font-medium hover:bg-opacity-90 transition text-center">
+                <a href="#estimate" class="bg-secondary text-white px-6 py-3 sm:px-8 rounded-full font-semibold hover:bg-secondary-dark transition text-center">
                     Get Free Estimate
                 </a>
-                <a href="#services" class="bg-white text-primary px-6 py-3 sm:px-8 rounded-full font-medium hover:bg-gray-100 transition text-center">
+                <a href="#services" class="bg-white text-primary px-6 py-3 sm:px-8 rounded-full font-semibold hover:bg-gray-100 transition text-center">
                     Our Services
                 </a>
             </div>
@@ -123,7 +142,7 @@
                 <div class="md:w-1/2">
                     <picture>
                         <source srcset="./images/about.webp" type="image/webp">
-                        <img src="./images/about.jpg" alt="Our Team" class="rounded-lg shadow-md w-full"
+                        <img src="./images/about.jpg" alt="GF Cleaning Services professional team members with cleaning equipment" class="rounded-lg shadow-md w-full"
                              width="600" height="400" loading="lazy">
                     </picture>
                 </div>
@@ -132,7 +151,7 @@
                     <p class="text-gray-700 mb-4">Founded in 2018, GF Cleaning Services began with a simple mission: to provide exceptional exterior cleaning services that enhance curb appeal and protect property investments.</p>
                     <p class="text-gray-700 mb-4">What started as a small local business has grown into a trusted name in pressure washing and exterior cleaning throughout Texas.</p>
                     <div class="bg-white p-6 rounded-lg shadow-sm">
-                        <h4 class="font-medium mb-3 text-primary">Why Choose Us</h4>
+                        <h4 class="font-semibold mb-3 text-gray-800">Why Choose Us</h4>
                         <ul class="space-y-2">
                             <li class="flex items-start">
                                 <i data-feather="check-circle" class="text-secondary mr-2 mt-1"></i>
@@ -165,17 +184,20 @@
                     <div class="md:w-1/2 p-6 md:p-8">
                         <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">Thank you for Your Interest!</h2>
                         <p class="text-gray-600 mb-6">Fill out our free estimate form below, and we will contact you as soon as possible.</p>
-                        <div class="space-y-4">
+                        <div class="space-y-8">
                             <picture>
                                 <source srcset="./images/before.webp" type="image/webp">
                                 <img src="./images/before.png" 
                                      alt="Before Cleaning Example" class="rounded-lg w-full"
-                                      loading="lazy">
+                                     width="800" height="600"
+                                     loading="lazy">
                             </picture>
+                            <div class="space-y-8"></div>
                             <picture>
                                 <source srcset="./images/after.webp" type="image/webp">
                                 <img src="./images/after.png" 
                                      alt="After Cleaning Example" class="rounded-lg w-full"
+                                     width="800" height="600"
                                      loading="lazy">
                             </picture>
                         </div>
@@ -185,38 +207,38 @@
 						<input type="hidden" name="_template" value="table">
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-gray-700 mb-1">First Name (required)</label>
-                                    <input name="First Name" placeholder="John" type="text" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <label for="firstName" class="block text-gray-700 mb-1">First Name (required)</label>
+                                    <input id="firstName" name="First Name" placeholder="John" type="text" required aria-required="true" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                                 </div>
                                 <div>
-                                    <label class="block text-gray-700 mb-1">Last Name</label>
-                                    <input name=" Last Name" placeholder="Doe" type="text" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <label for="lastName" class="block text-gray-700 mb-1">Last Name</label>
+                                    <input id="lastName" name="Last Name" placeholder="Doe" type="text" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-gray-700 mb-1">Email (required)</label>
-                                <input name="Email" placeholder="yourname@example.com" type="email" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <label for="email" class="block text-gray-700 mb-1">Email (required)</label>
+                                <input id="email" name="Email" placeholder="yourname@example.com" type="email" required aria-required="true" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                             </div>
                             <div>
-                                <label class="block text-gray-700 mb-1">Phone (required)</label>
-                                <input name="Phone" placeholder="+(555) 555-555" type="tel" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <label for="phone" class="block text-gray-700 mb-1">Phone (required)</label>
+                                <input id="phone" name="Phone" placeholder="+(555) 555-555" type="tel" required aria-required="true" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                             </div>
                             <div>
-                                <label class="block text-gray-700 mb-1">Address Line 1 (required)</label>
-                                <input name="Address Line 1" placeholder="123 Main Street" type="text" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <label for="address1" class="block text-gray-700 mb-1">Address Line 1 (required)</label>
+                                <input id="address1" name="Address Line 1" placeholder="123 Main Street" type="text" required aria-required="true" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                             </div>
                             <div>
-                                <label class="block text-gray-700 mb-1">Address Line 2</label>
-                                <input name="Address Line 2" placeholder="" type="text" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <label for="address2" class="block text-gray-700 mb-1">Address Line 2</label>
+                                <input id="address2" name="Address Line 2" placeholder="Apartment, suite, unit, etc. (optional)" type="text" aria-required="false" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                                 <div>
-                                    <label class="block text-gray-700 mb-1">City (required)</label>
-                                    <input name="City" placeholder="Anytown" type="text" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <label for="city" class="block text-gray-700 mb-1">City (required)</label>
+                                    <input id="city" name="City" placeholder="Anytown" type="text" required aria-required="true" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                                 </div>
                                 <div>
-                                    <label class="block text-gray-700 mb-1">ZIP Code (required)</label>
-                                    <input name="ZIP Code" placeholder="12345" type="text" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <label for="zipcode" class="block text-gray-700 mb-1">ZIP Code (required)</label>
+                                    <input id="zipcode" name="ZIP Code" placeholder="12345" type="text" required aria-required="true" pattern="[0-9]{5}" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                                 </div>
                             </div>
                             <div>
@@ -257,13 +279,13 @@
                                 </div>
                             </div>
                             <div>
-                                <label class="block text-gray-700 mb-1">How soon would you like service completed?</label>
-                                <select name="Timeline" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
-                                    <option>ASAP</option>
-                                    <option>Within 1 week</option>
-                                    <option>Within 2 weeks</option>
-                                    <option>Within 1 month</option>
-                                    <option>Not sure yet</option>
+                                <label for="timeline" class="block text-gray-700 mb-1">Timeline</label>
+                                <select id="timeline" name="Timeline" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                    <option value="asap">ASAP</option>
+                                    <option value="1week">Within 1 week</option>
+                                    <option value="2weeks">Within 2 weeks</option>
+                                    <option value="1month">Within 1 month</option>
+                                    <option value="unsure">Not sure yet</option>
                                 </select>
                             </div>
                             <div>
@@ -274,7 +296,7 @@
                                 <label class="block text-gray-700 mb-1">Anything you would like us to know?</label>
                                 <textarea name="Notes" placeholder="Your Message" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" rows="3"></textarea>
                             </div>
-                            <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-opacity-90 transition">
+                            <button type="submit" class="w-full bg-primary-dark text-white py-3 rounded-lg font-semibold hover:bg-primary transition" aria-label="Submit estimate request">
                                 Submit Request
                             </button>
                         </form>
@@ -343,7 +365,7 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row-reverse items-center">
                 <div class="md:w-1/2 mb-8 md:mb-0 md:pl-8">
-                    <span class="bg-secondary text-white text-xs font-medium px-2.5 py-0.5 rounded-full mb-2 inline-block">!!NEW!!</span>
+                    <span class="bg-secondary-dark text-white text-xs font-semibold px-2.5 py-0.5 rounded-full mb-2 inline-block">!!NEW!!</span>
                     <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">Professional Housekeeping</h2>
                     <ul class="space-y-3 text-gray-700">
                         <li class="flex items-center">
@@ -375,7 +397,7 @@
                     <picture>
                         <source srcset="./images/gf-hc.webp" type="image/webp">
                         <img src="./images/gf-hc.jpg" 
-                             alt="Professional Cleaning Services" class="rounded-lg object-cover h-64 sm:h-96 w-full"
+                             alt="Professional housekeeping service in action, demonstrating thorough interior cleaning" class="rounded-lg object-cover h-64 sm:h-96 w-full"
                              width="800" height="600" loading="lazy">
                     </picture>
                 </div>
@@ -423,7 +445,7 @@
                     <picture>
                         <source srcset="./images/gf-rc.webp" type="image/webp">
                         <img src="./images/gf-rc.jpg" 
-                             alt="Residential Power Washing Services" class="rounded-lg object-cover h-64 sm:h-96 w-full"
+                             alt="Residential power washing in progress on a home exterior, demonstrating our professional cleaning technique" class="rounded-lg object-cover h-64 sm:h-96 w-full"
                              width="800" height="600" loading="lazy">
                     </picture>
                 </div>
@@ -463,11 +485,11 @@
                         Get Commercial Estimate
                     </a>
                 </div>
-                <div class="md:w-1/2">
-                    <picture>
-                        <source srcset="./images/gf-bc.webp" type="image/webp">
+                <div class="md:w-1/2 flex items-end">
+                    <picture class="h-full">
+                        <source srcset="./images/gf-bc.webp" type="image/webp" class="object-bottom">
                         <img src="./images/gf-bc.jpg" 
-                             alt="Commercial Power Washing Services" class="rounded-lg object-cover h-64 sm:h-96 w-full object-top"
+                             alt="Commercial building exterior being professionally cleaned with power washing equipment" class="rounded-lg object-cover w-full h-full object-bottom"
                              width="800" height="600" loading="lazy">
                     </picture>
                 </div>
@@ -480,14 +502,14 @@
         <div class="container mx-auto px-4">
             <div class="bg-white rounded-xl shadow-lg overflow-hidden max-w-4xl mx-auto md:max-w-none">
                 <div class="md:flex">
-                    <div class="md:w-1/2 p-6 md:p-8 bg-primary text-white">
+                    <div class="md:w-1/2 p-6 md:p-8 bg-primary-dark text-white">
                         <h2 class="text-2xl sm:text-3xl font-bold mb-4">Contact Us</h2>
                         <div class="space-y-4">
                             <div class="flex items-start">
                                 <i data-feather="map-pin" class="mr-3 mt-1"></i>
                                 <div>
-                                    <h3 class="font-medium">Address</h3>
-                                    <p>3413 Hunter Rd Unit D PMB 246<br>San Marcos, TX 78666</p>
+                                    <h3 class="font-semibold">Address</h3>
+                                    <p class="text-gray-100">3413 Hunter Rd Unit D PMB 246<br>San Marcos, TX 78666</p>
                                 </div>
                             </div>
                             <div class="flex items-start">
@@ -511,22 +533,22 @@
                         <form class="space-y-4" action="https://formsubmit.co/gfcleaningservices18@gmail.com" method="POST">
 						<input type="hidden" name="_template" value="table">
                             <div>
-                                <label class="block text-gray-700 mb-1">Name</label>
-                                <input placeholder="John Doe" type="text" name="Name" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <label for="contactName" class="block text-gray-700 mb-1">Name</label>
+                                <input id="contactName" placeholder="John Doe" type="text" name="Name" required aria-required="true" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                             </div>
                             <div>
-                                <label class="block text-gray-700 mb-1">Email</label>
-                                <input placeholder="yourname@example.com" type="email" name="Email" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <label for="contactEmail" class="block text-gray-700 mb-1">Email</label>
+                                <input id="contactEmail" placeholder="yourname@example.com" type="email" name="Email" required aria-required="true" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                             </div>
                             <div>
-                                <label class="block text-gray-700 mb-1">Phone</label>
-                                <input placeholder="+(555) 555-555" type="tel" name="Phone" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <label for="contactPhone" class="block text-gray-700 mb-1">Phone</label>
+                                <input id="contactPhone" placeholder="+(555) 555-555" type="tel" name="Phone" required aria-required="true" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent">
                             </div>
                             <div>
-                                <label class="block text-gray-700 mb-1">Message</label>
-                                <textarea placeholder="Type your message" name="Message" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" rows="3"></textarea>
+                                <label for="contactMessage" class="block text-gray-700 mb-1">Message</label>
+                                <textarea id="contactMessage" placeholder="Type your message" name="Message" required aria-required="true" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent" rows="3"></textarea>
                             </div>
-                            <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-opacity-90 transition">
+                            <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-opacity-90 transition" aria-label="Send contact message">
                                 Send Message
                             </button>
                         </form>
@@ -536,24 +558,26 @@
         </div>
     </section>
 
+    </main>
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-8">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
-                    <img src="./images/gf-logo-white.svg" style="color: white;" height="50px" width="50px"
+                    <img src="./images/gf-logo-white.svg" style="color: white;" 
+                         width="40" height="40"
                          alt="GF Cleaning Services" class="h-10">
                 </div>
                 <div class="flex flex-col items-center md:items-end">
                     <div class="flex space-x-4 mb-4">
-                        <a href="#" class="hover:text-primary transition">
-                            <i data-feather="facebook"></i>
+                        <a href="#" class="hover:text-primary transition" aria-label="Visit our Facebook page">
+                            <i data-feather="facebook" aria-hidden="true"></i>
                         </a>
-                        <a href="https://www.instagram.com/gfcleaningservices18?igsh=NnZ4dHlydGsxMmdu" class="hover:text-primary transition">
-                            <i data-feather="instagram"></i>
+                        <a href="https://www.instagram.com/gfcleaningservices18?igsh=NnZ4dHlydGsxMmdu" class="hover:text-primary transition" aria-label="Visit our Instagram page">
+                            <i data-feather="instagram" aria-hidden="true"></i>
                         </a>
-                        <a href="#" class="hover:text-primary transition">
-                            <i data-feather="twitter"></i>
+                        <a href="#" class="hover:text-primary transition" aria-label="Visit our Twitter page">
+                            <i data-feather="twitter" aria-hidden="true"></i>
                         </a>
                     </div>
                     <p class="text-gray-400 text-sm">© 2025 GF Cleaning Services. All rights reserved.</p>
@@ -563,7 +587,11 @@
     </footer>
 
     <script>
-        feather.replace();
+        // Initialize Feather Icons after load
+        window.addEventListener('load', function() {
+            feather.replace();
+            document.body.classList.add('fouc-ready');
+        });
         
         // Mobile menu functionality
         const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -572,7 +600,8 @@
         mobileMenu.innerHTML = `
             <div class="flex justify-between items-center mb-8">
                 <img src="./images/gf_logo.svg" 
-                     alt="GF Cleaning Services" class="h-10">
+                     alt="GF Cleaning Services" class="h-10"
+                     width="40" height="40">
                 <button id="mobile-menu-close" class="text-gray-700">
                     <i data-feather="x"></i>
                 </button>
