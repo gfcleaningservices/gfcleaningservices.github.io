@@ -23,7 +23,18 @@
                         primary: '#0052cc',
                         secondary: '#087f5b',
                         'primary-dark': '#003d99',
-                        'secondary-dark': '#066b4b',
+                        'secondary-dark': '#065f44',
+						'white': '#ffffff',
+                    },
+                    // Add custom animation for the scrolling banner
+                    animation: {
+                        marquee: 'marquee 25s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
                     }
                 }
             }
@@ -78,9 +89,10 @@
 </head>
 <script src="/analytics-tracker.js"></script>
 <body class="font-sans bg-gray-50 no-fouc">
+
     <!-- Top Bar -->
-    <div class="bg-primary text-white py-2 px-4 flex justify-between items-center">
-        <a href="tel:512-357-8302" class="flex items-center gap-2 font-medium hover:text-gray-200 transition">
+    <div class="bg-white text-gray-700 hover:text-primary py-2 px-4 flex justify-between items-center">
+        <a href="tel:512-357-8302" class="flex items-center gap-2 font-medium transition">
             <i data-feather="phone"></i>
             <span class="hidden sm:inline">Call Us Now: 512-357-8302</span>
             <span class="sm:hidden">Call Now</span>
@@ -89,6 +101,22 @@
             Free Estimate
         </a>
     </div>
+	
+	 <!-- SCROLLING TOP BANNER (Style 1: Brand-Matched) -->
+    <div class="bg-primary text-white py-2 overflow-hidden flex whitespace-nowrap w-full z-50 relative shadow-sm">
+        <div class="animate-marquee flex min-w-full shrink-0 items-center justify-around">
+            <span class="mx-4 font-bold tracking-wide"> FOR A LIMITED TIME 15% OFF FOR FIRST-TIME CUSTOMERS! </span>
+            <span class="mx-4 font-bold tracking-wide"> FOR A LIMITED TIME 15% OFF FOR FIRST-TIME CUSTOMERS! </span>
+            <span class="mx-4 font-bold tracking-wide"> FOR A LIMITED TIME 15% OFF FOR FIRST-TIME CUSTOMERS! </span>
+        </div>
+        <!-- Duplicated container creates the seamless infinite loop -->
+        <div class="animate-marquee flex min-w-full shrink-0 items-center justify-around" aria-hidden="true">
+            <span class="mx-4 font-bold tracking-wide"> FOR A LIMITED TIME 15% OFF FOR FIRST-TIME CUSTOMERS! </span>
+            <span class="mx-4 font-bold tracking-wide"> FOR A LIMITED TIME 15% OFF FOR FIRST-TIME CUSTOMERS! </span>
+            <span class="mx-4 font-bold tracking-wide"> FOR A LIMITED TIME 15% OFF FOR FIRST-TIME CUSTOMERS! </span>
+        </div>
+    </div>
+
 
     <!-- Navigation -->
     <nav class="bg-white shadow-md sticky top-0 z-50" role="navigation" aria-label="Main navigation">
@@ -149,8 +177,9 @@
                 </div>
                 <div class="md:w-1/2">
                     <h3 class="text-xl font-semibold mb-4">Our Story</h3>
-                    <p class="text-gray-700 mb-4">Founded in 2018, GF Cleaning Services began with a simple mission: to provide exceptional exterior cleaning services that enhance curb appeal and protect property investments.</p>
-                    <p class="text-gray-700 mb-4">What started as a small local business has grown into a trusted name in pressure washing and exterior cleaning throughout Texas.</p>
+                    <p class="text-gray-700 mb-4">GF Cleaning Services began with a simple mission: to provide exceptional exterior and interior cleaning services throughout central Texas.<br><br>
+Our goal is to partner with our communities to help protect their property investments.<br>
+We do this by taking the time to listen to our customers, focusing on the details, to achieve their vision.</p>
                     <div class="bg-white p-6 rounded-lg shadow-sm">
                         <h4 class="font-semibold mb-3 text-gray-800">Why Choose Us</h4>
                         <ul class="space-y-2">
@@ -277,6 +306,14 @@
                                         <input name="Commercial Cleaning Services" type="checkbox" class="rounded text-primary">
                                         <span class="ml-2">Commercial Cleaning Services</span>
                                     </label>
+									<label class="flex items-center">
+                                        <input name="Office Cleaning" type="checkbox" class="rounded text-primary">
+                                        <span class="ml-2">Office Cleaning</span>
+                                    </label>
+									<label class="flex items-center">
+                                        <input name="Dental Office Cleaning" type="checkbox" class="rounded text-primary">
+                                        <span class="ml-2">Dental Office Cleaning</span>
+                                    </label>
                                 </div>
                             </div>
                             <div>
@@ -388,6 +425,14 @@
                         <li class="flex items-center">
                             <i data-feather="check-circle" class="text-secondary mr-2"></i>
                             <span>Commercial Spaces</span>
+                        </li>
+						<li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Office Cleaning</span>
+                        </li>
+						<li class="flex items-center">
+                            <i data-feather="check-circle" class="text-secondary mr-2"></i>
+                            <span>Dental Office Cleaning</span>
                         </li>
                     </ul>
                     <a href="#estimate" class="mt-6 inline-block bg-primary text-white px-6 py-2 rounded-full font-medium hover:bg-opacity-90 transition">
